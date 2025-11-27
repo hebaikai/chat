@@ -19,9 +19,10 @@ os.makedirs(AVATAR_FOLDER, exist_ok=True)
 os.makedirs(FEED_FOLDER, exist_ok=True)
 
 # 获取服务器地址（可以根据实际部署情况修改）
-SERVER_HOST = 'localhost'
-SERVER_PORT = 5000
-BASE_URL = f'http://{SERVER_HOST}:{SERVER_PORT}'
+# 优先使用环境变量，便于部署到Render等云服务
+SERVER_PORT = int(os.environ.get('PORT', 5000))
+# Render部署时使用生产域名，本地开发时使用localhost
+BASE_URL = os.environ.get('BASE_URL', 'https://chat-6w29.onrender.com')
 
 def allowed_file(filename):
     """检查文件扩展名是否允许"""
